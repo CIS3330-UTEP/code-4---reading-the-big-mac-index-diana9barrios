@@ -4,7 +4,8 @@ big_mac_file = './big-mac-full-index.csv'
 df = pd.read_csv('./big-mac-full-index.csv')
 
 def get_big_mac_price_by_year(year,country_code):
-    filtered_df = df[(df['date'].str[:4] == str(year)) & (df['iso_a3'].str.lower() == country_code)]
+    filtered_df = df[(df['date'].str[:4] == str(year)) & (df['iso_a3'].str.lower() == country_code)] 
+
     #processing the data
     if not filtered_df.empty:
         mean_price = filtered_df['dollar_price'].mean()
@@ -30,10 +31,10 @@ def get_the_cheapest_big_mac_price_by_year(year):
     filtered_df = df[year_filter]
 
     if not filtered_df.empty:
-        cheapest_price = filtered_df[filtered_df['dollar_price'].idmin()]
+        cheapest_price = filtered_df.loc[filtered_df['dollar_price'].idxmin()]
         country = cheapest_price['name']
         country_code = cheapest_price['iso_a3']
-        price_rounded = round(cheapest_price['dollar_price'],2)
+        price_rounded = round(cheapest_price['dollar_price'], 2)
         return f"{country}({country_code}): $ {price_rounded}"
 
 
@@ -46,7 +47,7 @@ def get_the_most_expensive_big_mac_price_by_year(year):
         highest_price = filtered_df.loc[filtered_df['dollar_price'].idxmax()]
         country = highest_price['name']
         country_code = highest_price['iso_a3']
-        price_rounded = round (highest_price['dollar_price',2])
+        price_rounded = round(highest_price['dollar_price'], 2)
 
         return f"{country}({country_code}): ${price_rounded}"
     return None
