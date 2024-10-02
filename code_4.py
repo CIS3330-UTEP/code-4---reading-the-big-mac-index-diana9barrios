@@ -10,6 +10,7 @@ def get_big_mac_price_by_year(year,country_code):
     filtered_df = df[(df['date'].str[:4] == str(year)) & (df['iso_a3'].str.lower() == country_code)] 
 
     #processing the data by making sure conditions are met
+    # using this makes sure df isnt empty to go on with the statment
     if not filtered_df.empty:
         mean_price = filtered_df['dollar_price'].mean()
         # round two decimals
@@ -32,10 +33,13 @@ def get_big_mac_price_by_country(country_code):
 def get_the_cheapest_big_mac_price_by_year(year):
     cheapest_year = str(year)
     # stores first 4 characters of date/ stores in in year_filter
+    #  by comparing the date we are looking at to the previous cheepest year
     year_filter = df['date'].str[:4] == cheapest_year
+   
     filtered_df = df[year_filter]
 
     if not filtered_df.empty:
+       
         lowest_price = filtered_df.loc[filtered_df['dollar_price'].idxmin()]
         country = lowest_price['name']
         country_code = lowest_price['iso_a3']
@@ -77,3 +81,5 @@ if __name__ == "__main__":
     #Chat-GPT(GPT-4). Date of query (2024/09/29). "why do I keep getting the error 'none'"
     # (this was in reagard to def get_big_mac_price_by_year(year,country_code))
     # #Generated using OpenAI Chat-GPT. https://chat.openai.com/
+
+  
