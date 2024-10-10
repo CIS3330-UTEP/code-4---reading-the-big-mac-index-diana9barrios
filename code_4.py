@@ -4,11 +4,14 @@ big_mac_file = './big-mac-full-index.csv'
 df = pd.read_csv('./big-mac-full-index.csv')
 
 def get_big_mac_price_by_year(year,country_code):
-    date_query = f"('date' >= '{year}-01-01' and 'date' <= '{year}-12-31') & (iso_a3 == {country_code})
-    # price_df = df.query('date_query == @year and iso_a3.lower == @state_code')
-
-    price_mean = price_df['dollar_price'].mean()
-    return(round(price_mean,2))
+    date_query = f"('date' >= '{year}-01-01' and 'date' <= '{year}-12-31') & ('iso_a3' == '{country_code.upper()}')"
+    
+   
+    price_df = df.query(date_query)
+    # print(price_df)
+    print(date_query)
+    # price_mean = price_df['dollar_price'].mean()
+    # return(round(price_mean,2))
 
 
 def get_big_mac_price_by_country(country_code):
@@ -34,8 +37,5 @@ if __name__ == "__main__":
     # print(result_d)
 
 
-    #Chat-GPT(GPT-4). Date of query (2024/09/29). "why do I keep getting the error 'none'"
-    # (this was in reagard to def get_big_mac_price_by_year(year,country_code))
-    # #Generated using OpenAI Chat-GPT. https://chat.openai.com/
-
+ 
   
