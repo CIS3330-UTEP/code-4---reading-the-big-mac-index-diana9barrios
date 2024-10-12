@@ -23,7 +23,7 @@ def get_the_cheapest_big_mac_price_by_year(year):
     year_query = f"(date >= '{year}-01-01' and date <= '{year}-12-31')"
     price_df = df.query(year_query)
     min_idx = price_df['dollar_price'].idxmin()
-    price = round(price_df.loc[min_idx]['dollar_price'],1)
+    price = round(price_df.loc[min_idx]['dollar_price'],2)
     country_name = (price_df.loc[min_idx]['name'])
     country_code = (price_df.loc[min_idx]['iso_a3'])
     
@@ -35,7 +35,7 @@ def get_the_most_expensive_big_mac_price_by_year(year):
     year_query = f"(date >= '{year}-01-01' and date <= '{year}-12-31')"
     price_df = df.query(year_query)
     max_idx = price_df['dollar_price'].idxmax()
-    price = round(price_df.loc[max_idx]['dollar_price'],1)
+    price = round(price_df.loc[max_idx]['dollar_price'],2)
     country_name = (price_df.loc[max_idx]['name'])
     country_code = (price_df.loc[max_idx]['iso_a3'])
 
